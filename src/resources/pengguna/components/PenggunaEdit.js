@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { PENGGUNA } from "../consts";
 import {
-  Create,
+  Edit,
   SimpleForm,
+  DisabledInput,
   ReferenceInput,
   SelectInput,
   FormDataConsumer,
@@ -16,11 +17,13 @@ import { SATUAN_POMAD_DAERAH } from "../../satuan_pomad_daerah/consts";
 
 const REC = PENGGUNA;
 const FIELD = REC.field;
+const Title = ({ record }) => <span>{record[FIELD.nrp.res]}</span>;
 
-class PenggunaCreate extends Component {
+class PenggunaEdit extends Component {
   renderComponent = props => (
-    <Create {...props} title={REC.lab}>
+    <Edit {...props} title={<Title />}>
       <SimpleForm>
+        <DisabledInput source={FIELD.id.res} label={FIELD.id.lab} />
         <ReferenceInput
           source={FIELD.peran.res}
           label={FIELD.peran.lab}
@@ -75,7 +78,7 @@ class PenggunaCreate extends Component {
           validate={required()}
         />
       </SimpleForm>
-    </Create>
+    </Edit>
   );
 
   render() {
@@ -83,4 +86,4 @@ class PenggunaCreate extends Component {
   }
 }
 
-export default PenggunaCreate;
+export default PenggunaEdit;
